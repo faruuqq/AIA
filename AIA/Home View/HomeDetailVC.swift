@@ -9,14 +9,23 @@ import UIKit
 
 class HomeDetailVC: UITableViewController {
     
+    struct Section: Hashable {
+        let date: Date
+        var identifier = UUID()
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(identifier)
+        }
+    }
+    
+    var section: [Section] = []
     var loadSymbol: String?
     var item: [Intraday] = []
     let homeVC = HomeVC()
 
     private var dataSource: DataSource!
     
-    typealias DataSource = UITableViewDiffableDataSource<Int, Intraday>
-    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Int, Intraday>
+    typealias DataSource = UITableViewDiffableDataSource<Section, Intraday>
+    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, Intraday>
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +44,12 @@ extension HomeDetailVC {
         homeVC.indicator.startAnimating()
         homeVC.indicator.isHidden = false
         present(homeVC.alert, animated: true, completion: nil)
+        
+        var snapshot = DataSourceSnapshot()
+        let formatter = DateFormatter()
+        formatter.locale = .current
+        formatter.dateStyle = .medium
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 
         var components = URLComponents(string: "https://www.alphavantage.co/query?")
         components?.queryItems = [
@@ -82,13 +97,17 @@ extension HomeDetailVC {
                         let low = value!["3. low"] as! String
                         
                         let newItem = Intraday(open: open, high: high, low: low, date: date)
+                        let newSection = Section(date: formatter.date(from: date)!)
                         
                         self?.item.append(newItem)
-                        self?.applySnapshot(item: self!.item)
-                        self?.homeVC.indicator.stopAnimating()
-                        self?.homeVC.alert.dismiss(animated: true, completion: nil)
-                        
+                        self?.section.append(newSection)
+//                        self?.applySnapshot(item: self!.item)
+                        snapshot.appendSections([newSection])
+                        snapshot.appendItems([newItem], toSection: newSection)
+                        self?.dataSource.apply(snapshot, animatingDifferences: true)
                     })
+                    self?.homeVC.indicator.stopAnimating()
+                    self?.homeVC.alert.dismiss(animated: true, completion: nil)
                 }
             } catch (let error) {
                 DispatchQueue.main.async {
@@ -111,10 +130,19 @@ extension HomeDetailVC {
         })
     }
     
-    fileprivate func applySnapshot(item: [Intraday]) {
-        var snapshot = DataSourceSnapshot()
-        snapshot.appendSections([0])
-        snapshot.appendItems(item)
-        dataSource.apply(snapshot, animatingDifferences: true)
+//    fileprivate func applySnapshot(item: [Intraday]) {
+//        var snapshot = DataSourceSnapshot()
+//        snapshot.appendSections([0])
+//        snapshot.appendItems(item)
+//        dataSource.apply(snapshot, animatingDifferences: true)
+//    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let format = DateFormatter()
+        format.locale = .current
+        format.dateStyle = .medium
+
+        let sorted = DataSourceSnapshot().sectionIdentifiers.sorted { $0.date > $1.date }
+        return format.string(from: sorted[section].date)
     }
 }
