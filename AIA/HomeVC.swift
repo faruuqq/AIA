@@ -9,6 +9,7 @@ import UIKit
 
 class HomeVC: UITableViewController {
     
+    var selectedSymbol: String?
     var item: [BestMatches] = []
     private var dataSource: DataSource!
     
@@ -26,17 +27,14 @@ class HomeVC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        indicator.hidesWhenStopped = true
-        indicator.isHidden = true
-        alert.view.addSubview(indicator)
         self.title = "Home"
+        configureAlert()
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchBar.delegate = self
         configureTableViewDataSource()
         fetchingData(keywords: "IBM".uppercased())
-        
     }
 
 }
@@ -131,9 +129,25 @@ extension HomeVC {
         dataSource.apply(snapshot, animatingDifferences: true)
     }
     
+    func configureAlert() {
+        indicator.hidesWhenStopped = true
+        indicator.isHidden = true
+        alert.view.addSubview(indicator)
+    }
+}
+
+extension HomeVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        print(dataSource.itemIdentifier(for: indexPath)!)
+        let symbol = dataSource.itemIdentifier(for: indexPath)?.symbol
+        selectedSymbol = symbol
+        
+        performSegue(withIdentifier: "toDetail", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let detailVC = segue.destination as! HomeDetailVC
+        detailVC.loadSymbol = selectedSymbol
     }
     
 }

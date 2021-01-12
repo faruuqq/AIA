@@ -18,12 +18,21 @@ struct BestMatches: Decodable, Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(identifier)
     }
-    static func == (lhs: BestMatches, rhs: BestMatches) -> Bool {
-        return lhs.identifier == rhs.identifier
-    }
     
     enum CodingKeys: String, CodingKey {
         case symbol = "1. symbol"
         case companyName = "2. name"
     }
 }
+
+struct Intraday: Decodable, Hashable {
+    let open: String
+    let high: String
+    let low: String
+    let date: String
+    var identifier = UUID()
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+    }
+}
+

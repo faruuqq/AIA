@@ -8,82 +8,113 @@
 import UIKit
 
 class HomeDetailVC: UITableViewController {
+    
+    var loadSymbol: String?
+    var item: [Intraday] = []
+    let homeVC = HomeVC()
 
+    private var dataSource: DataSource!
+    
+    typealias DataSource = UITableViewDiffableDataSource<Int, Intraday>
+    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Int, Intraday>
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        homeVC.configureAlert()
+        self.title = "Intraday"
+        configureTableViewDataSource()
+        print(loadSymbol!)
+        fetchIntraday(keywords: loadSymbol!)
     }
 
-    // MARK: - Table view data source
+}
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+extension HomeDetailVC {
+    fileprivate func fetchIntraday(keywords: String) {
+        
+        homeVC.indicator.startAnimating()
+        homeVC.indicator.isHidden = false
+        present(homeVC.alert, animated: true, completion: nil)
+
+        var components = URLComponents(string: "https://www.alphavantage.co/query?")
+        components?.queryItems = [
+            URLQueryItem(name: "function", value: "TIME_SERIES_INTRADAY"),
+            URLQueryItem(name: "symbol", value: keywords),
+            URLQueryItem(name: "interval", value: "1min"),
+            URLQueryItem(name: "apikey", value: "E2GZMXN5UJD1MWLW")
+        ]
+        
+        var request = URLRequest(url: components!.url!)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "GET"
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request) { [weak self] (data, response, error) in
+            
+            guard let response = response as? HTTPURLResponse else { return }
+            if response.statusCode != 200 {
+                print("status code != 200")
+                return
+            }
+            do {
+                let result = try JSONSerialization.jsonObject(with: data!) as? [String: Any]
+                
+                DispatchQueue.main.async {
+                    if result?.first?.key == "Error Message" || result?.first?.key == "Note" {
+                        print("error message")
+                        self?.homeVC.indicator.stopAnimating()
+                        self?.homeVC.alert.dismiss(animated: true, completion: {
+                            let popUp = UIAlertController(title: nil, message: "No matching data", preferredStyle: .alert)
+                            popUp.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                            self?.present(popUp, animated: true, completion: nil)
+                            return
+                        })
+                    }
+                    
+                    let times = result!["Time Series (1min)"] as? [String: Any]
+                    self?.item = []
+                    times?.forEach ({ (item) in
+//                        print("item = \(item.key)")
+                        let date = item.key
+                        let value = item.value as? [String: Any]
+                        let open = value!["1. open"] as! String
+                        let high = value!["2. high"] as! String
+                        let low = value!["3. low"] as! String
+                        
+                        let newItem = Intraday(open: open, high: high, low: low, date: date)
+                        
+                        self?.item.append(newItem)
+                        self?.applySnapshot(item: self!.item)
+                        self?.homeVC.indicator.stopAnimating()
+                        self?.homeVC.alert.dismiss(animated: true, completion: nil)
+                        
+                    })
+                }
+            } catch (let error) {
+                DispatchQueue.main.async {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        dataTask.resume()
     }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+    
+    fileprivate func configureTableViewDataSource() {
+        dataSource = DataSource(tableView: tableView, cellProvider: { (tableView, indexPath, item) -> UITableViewCell? in
+            
+            let cell = self.nibBundle?.loadNibNamed("HomeDetailCell", owner: self, options: nil)?.first as! HomeDetailCell
+            cell.openLabel.text = "1. Open: \(item.open)"
+            cell.highLabel.text = "2. High: \(item.high)"
+            cell.lowLabel.text = "3. Low: \(item.low)"
+            cell.dateLabel.text = item.date
+            return cell
+        })
     }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+    
+    fileprivate func applySnapshot(item: [Intraday]) {
+        var snapshot = DataSourceSnapshot()
+        snapshot.appendSections([0])
+        snapshot.appendItems(item)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

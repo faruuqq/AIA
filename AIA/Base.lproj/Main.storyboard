@@ -55,14 +55,13 @@
             </objects>
             <point key="canvasLocation" x="1939.1304347826087" y="143.97321428571428"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Home DetailVC-->
         <scene sceneID="IRU-cV-238">
             <objects>
-                <tableViewController id="xsF-ax-YL4" sceneMemberID="viewController">
+                <tableViewController id="xsF-ax-YL4" customClass="HomeDetailVC" customModule="AIA" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Spw-1Q-VqR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="A0Y-6Q-k1X">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
