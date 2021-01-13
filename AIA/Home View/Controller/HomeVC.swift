@@ -34,7 +34,7 @@ class HomeVC: UITableViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchBar.delegate = self
         configureTableViewDataSource()
-//        fetchingData(keywords: "IBM".uppercased())
+        fetchingData(keywords: "IBM".uppercased())
     }
 
 }
@@ -47,7 +47,7 @@ extension HomeVC: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        //MARK: due to free apikey, the request is limited. Uncomment code below to enable instant fetching
+        //MARK: due to free apikey, the request is limited. Uncomment code below to enable instant fetching, consider also to comment out the loading popup
         
 //        item = []
 //        fetchingData(keywords: searchBar.searchTextField.text!.uppercased())
@@ -56,7 +56,26 @@ extension HomeVC: UISearchBarDelegate {
 }
 
 extension HomeVC {
-    /*completion: @escaping (Result<[HomeModel], Error>) -> ()*/
+    
+    func loadKeychain() -> String {
+        var ref: CFTypeRef?
+        let query = [
+            kSecClass: kSecClassKey,
+            kSecAttrApplicationTag: "alphavantage",
+            kSecReturnData: true
+        ] as CFDictionary
+        
+        let status = SecItemCopyMatching(query, &ref)
+        print("Operation finished with status: \(status)")
+        print(ref as! SecKey)
+        
+        let dic = ref as! SecKey
+        let convertedData = dic as! Data
+        let retrievedData = String(data: convertedData, encoding: .utf8)!
+        print("retrieved keychain = \(retrievedData)")
+        return retrievedData
+    }
+    
     fileprivate func fetchingData(keywords: String) {
         indicator.startAnimating()
         indicator.isHidden = false
@@ -65,7 +84,7 @@ extension HomeVC {
         components?.queryItems = [
             URLQueryItem(name: "function", value: "SYMBOL_SEARCH"),
             URLQueryItem(name: "keywords", value: keywords),
-            URLQueryItem(name: "apikey", value: "E2GZMXN5UJD1MWLW")
+            URLQueryItem(name: "apikey", value: loadKeychain())
         ]
         
         var request = URLRequest(url: components!.url!)

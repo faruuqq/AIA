@@ -60,6 +60,7 @@ class ThirdVC: UIViewController {
         
         userDefault.setValue(intervalLabel.text, forKey: "interval")
         userDefault.setValue(outputLabel.text, forKey: "output")
+        updateKeychain()
         
         homeVC.indicator.startAnimating()
         homeVC.indicator.isHidden = false
@@ -216,6 +217,20 @@ extension ThirdVC {
         view.endEditing(true)
     }
     
+    func updateKeychain() {
+        let query = [
+            kSecClass: kSecClassKey,
+            kSecAttrApplicationTag: "alphavantage",
+        ] as CFDictionary
+        
+        let updateFields = [
+            kSecValueData: apiLabel.text!.data(using: .utf8)!
+        ] as CFDictionary
+        
+        let status = SecItemUpdate(query, updateFields)
+        print("Operation finished with status: \(status)")
+    }
+    
     fileprivate func fetchData(symbol: String, api: String, interval: String, outputsize: String, completion: @escaping (Result<[String: Any], Error>) -> ()) {
         
         var components = URLComponents(string: "https://www.alphavantage.co/query?")
@@ -232,7 +247,7 @@ extension ThirdVC {
         request.httpMethod = "GET"
         
         let session = URLSession.shared
-        let dataTask = session.dataTask(with: request) { (data, response, error) in
+        let dataTask = session.dataTask(with: request) { [weak self] (data, response, error) in
             
             guard let response = response as? HTTPURLResponse else { return }
             if response.statusCode != 200 {
@@ -246,7 +261,13 @@ extension ThirdVC {
                 DispatchQueue.main.async {
                     if result?.first?.key == "Error Message" || result?.first?.key == "Note" {
                         print("error message")
-                        return //replace this
+                        self?.homeVC.indicator.stopAnimating()
+                        self?.homeVC.alert.dismiss(animated: true, completion: {
+                            let popUp = UIAlertController(title: nil, message: "No matching data", preferredStyle: .alert)
+                            popUp.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                            self?.present(popUp, animated: true, completion: nil)
+                            return
+                        })
                     }
                     
                     let times = result!["Time Series (\(interval))"] as? [String: Any]

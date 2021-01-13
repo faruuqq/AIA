@@ -219,7 +219,7 @@ extension NewSecondVC {
         components?.queryItems = [
             URLQueryItem(name: "function", value: "TIME_SERIES_DAILY_ADJUSTED"),
             URLQueryItem(name: "symbol", value: keywords),
-            URLQueryItem(name: "apikey", value: "E2GZMXN5UJD1MWLW")
+            URLQueryItem(name: "apikey", value: homeVC.loadKeychain())
         ]
         
         var request = URLRequest(url: components!.url!)

@@ -56,7 +56,7 @@ extension HomeDetailVC {
             URLQueryItem(name: "function", value: "TIME_SERIES_INTRADAY"),
             URLQueryItem(name: "symbol", value: keywords),
             URLQueryItem(name: "interval", value: "1min"),
-            URLQueryItem(name: "apikey", value: "E2GZMXN5UJD1MWLW")
+            URLQueryItem(name: "apikey", value: homeVC.loadKeychain())
         ]
         
         var request = URLRequest(url: components!.url!)
