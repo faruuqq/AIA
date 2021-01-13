@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--SecondVC-->
+        <!--New SecondVC-->
         <scene sceneID="3zE-tb-A71">
             <objects>
-                <viewController id="gB0-k1-yI2" customClass="SecondVC" customModule="AIA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="gB0-k1-yI2" customClass="NewSecondVC" customModule="AIA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qEw-dj-fLK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -20,28 +20,12 @@
                                 <rect key="frame" x="0.0" y="275.5" width="414" height="537.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="byd-D7-4ug" detailTextLabel="54O-zZ-d0v" style="IBUITableViewCellStyleSubtitle" id="eHW-aE-gPZ">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="55.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="eHW-aE-gPZ">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eHW-aE-gPZ" id="mTK-wV-r9w">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="55.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="byd-D7-4ug">
-                                                    <rect key="frame" x="20" y="10" width="33" height="20.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="54O-zZ-d0v">
-                                                    <rect key="frame" x="20" y="31.5" width="44" height="14.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -84,7 +68,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="compareBtnAction:" destination="gB0-k1-yI2" eventType="touchUpInside" id="CaR-8v-NWh"/>
+                                            <action selector="compareBtnAction:" destination="gB0-k1-yI2" eventType="touchUpInside" id="NYf-6e-Rqq"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -111,9 +95,9 @@
                     <navigationItem key="navigationItem" id="JrG-Pq-FIU"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="input1" destination="I4g-AK-BnW" id="nBg-zD-Fgb"/>
-                        <outlet property="input2" destination="vbb-cU-3Qr" id="3t2-C5-btM"/>
-                        <outlet property="tableView" destination="0t9-pL-Vhj" id="xin-Sc-Bfu"/>
+                        <outlet property="input1" destination="I4g-AK-BnW" id="oIT-lu-QW9"/>
+                        <outlet property="input2" destination="vbb-cU-3Qr" id="whp-do-F4j"/>
+                        <outlet property="tableView" destination="0t9-pL-Vhj" id="TJA-vY-MOU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NnR-sS-FBH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

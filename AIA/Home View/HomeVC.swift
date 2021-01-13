@@ -34,7 +34,7 @@ class HomeVC: UITableViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchBar.delegate = self
         configureTableViewDataSource()
-        fetchingData(keywords: "IBM".uppercased())
+//        fetchingData(keywords: "IBM".uppercased())
     }
 
 }

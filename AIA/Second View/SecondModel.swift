@@ -8,9 +8,14 @@
 import Foundation
 
 struct DailyAdjusted: Hashable {
-    let open: String
-    let low: String
-    let date: String
+    let open1: String
+    let low1: String
+//    let date1: String?
+    let date: Date?
+    
+    let open2: String
+    let low2: String
+    
     var identifier = UUID()
     func hash(into hasher: inout Hasher) {
         hasher.combine(identifier)

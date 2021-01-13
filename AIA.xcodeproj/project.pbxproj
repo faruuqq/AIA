@@ -19,8 +19,11 @@
 		2A68DF8525AD07850062BE62 /* HomeDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A68DF8325AD07850062BE62 /* HomeDetailCell.swift */; };
 		2A68DF8625AD07850062BE62 /* HomeDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A68DF8425AD07850062BE62 /* HomeDetailCell.xib */; };
 		2A68DF8A25AD94890062BE62 /* Second.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A68DF8925AD94890062BE62 /* Second.storyboard */; };
-		2A68DF8D25AD94BB0062BE62 /* SecondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A68DF8C25AD94BB0062BE62 /* SecondVC.swift */; };
 		2A68DF9A25ADA02F0062BE62 /* SecondModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A68DF9925ADA02F0062BE62 /* SecondModel.swift */; };
+		2A68DFA125AE4C090062BE62 /* SecondCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A68DF9F25AE4C090062BE62 /* SecondCell.swift */; };
+		2A68DFA225AE4C090062BE62 /* SecondCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A68DFA025AE4C090062BE62 /* SecondCell.xib */; };
+		2A68DFA825AE55D40062BE62 /* SampleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A68DFA725AE55D40062BE62 /* SampleTableViewController.swift */; };
+		2A68DFAC25AE55E70062BE62 /* NewSecondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A68DFAB25AE55E70062BE62 /* NewSecondVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,8 +41,11 @@
 		2A68DF8325AD07850062BE62 /* HomeDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDetailCell.swift; sourceTree = "<group>"; };
 		2A68DF8425AD07850062BE62 /* HomeDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeDetailCell.xib; sourceTree = "<group>"; };
 		2A68DF8925AD94890062BE62 /* Second.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Second.storyboard; sourceTree = "<group>"; };
-		2A68DF8C25AD94BB0062BE62 /* SecondVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondVC.swift; sourceTree = "<group>"; };
 		2A68DF9925ADA02F0062BE62 /* SecondModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondModel.swift; sourceTree = "<group>"; };
+		2A68DF9F25AE4C090062BE62 /* SecondCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCell.swift; sourceTree = "<group>"; };
+		2A68DFA025AE4C090062BE62 /* SecondCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondCell.xib; sourceTree = "<group>"; };
+		2A68DFA725AE55D40062BE62 /* SampleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTableViewController.swift; sourceTree = "<group>"; };
+		2A68DFAB25AE55E70062BE62 /* NewSecondVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSecondVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,8 +115,11 @@
 			isa = PBXGroup;
 			children = (
 				2A68DF8925AD94890062BE62 /* Second.storyboard */,
-				2A68DF8C25AD94BB0062BE62 /* SecondVC.swift */,
+				2A68DFA725AE55D40062BE62 /* SampleTableViewController.swift */,
+				2A68DFAB25AE55E70062BE62 /* NewSecondVC.swift */,
 				2A68DF9925ADA02F0062BE62 /* SecondModel.swift */,
+				2A68DF9F25AE4C090062BE62 /* SecondCell.swift */,
+				2A68DFA025AE4C090062BE62 /* SecondCell.xib */,
 			);
 			path = "Second View";
 			sourceTree = "<group>";
@@ -173,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A68DF6D25AC500E0062BE62 /* LaunchScreen.storyboard in Resources */,
+				2A68DFA225AE4C090062BE62 /* SecondCell.xib in Resources */,
 				2A68DF6A25AC500E0062BE62 /* Assets.xcassets in Resources */,
 				2A68DF6825AC500C0062BE62 /* Main.storyboard in Resources */,
 				2A68DF8A25AD94890062BE62 /* Second.storyboard in Resources */,
@@ -190,11 +200,13 @@
 				2A68DF8125AC96610062BE62 /* HomeDetailVC.swift in Sources */,
 				2A68DF7B25AC5A4A0062BE62 /* NetworkController.swift in Sources */,
 				2A68DF7825AC599D0062BE62 /* HomeModel.swift in Sources */,
+				2A68DFAC25AE55E70062BE62 /* NewSecondVC.swift in Sources */,
+				2A68DFA125AE4C090062BE62 /* SecondCell.swift in Sources */,
 				2A68DF6525AC500C0062BE62 /* HomeVC.swift in Sources */,
 				2A68DF9A25ADA02F0062BE62 /* SecondModel.swift in Sources */,
+				2A68DFA825AE55D40062BE62 /* SampleTableViewController.swift in Sources */,
 				2A68DF8525AD07850062BE62 /* HomeDetailCell.swift in Sources */,
 				2A68DF6125AC500C0062BE62 /* AppDelegate.swift in Sources */,
-				2A68DF8D25AD94BB0062BE62 /* SecondVC.swift in Sources */,
 				2A68DF6325AC500C0062BE62 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
