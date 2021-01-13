@@ -10,10 +10,26 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        let tag = "alphavantage"
+        let api = "E2GZMXN5UJD1MWLW"
+        
+        let encrypted = api.data(using: .utf8)
+        
+        let keychainItemQuery = [
+            kSecAttrApplicationTag: tag,
+            kSecValueData: encrypted!,
+            kSecClass: kSecClassKey
+        ] as CFDictionary
+        
+        let delete = SecItemDelete(keychainItemQuery as CFDictionary)
+        print(delete)
+        
+        let status = SecItemAdd(keychainItemQuery, nil)
+        print("Operation finished with status: \(status)")
+        
+        
         return true
     }
 
