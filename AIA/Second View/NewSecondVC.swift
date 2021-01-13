@@ -64,7 +64,6 @@ class NewSecondVC: UIViewController {
                 print(error.localizedDescription)
             case .success(let data):
                 self?.item1 = []
-                print("data = \(data.keys.count)")
                 data.forEach { (item) in
                     let date = item.key
                     let value = item.value as? [String: Any]
@@ -138,8 +137,8 @@ extension NewSecondVC: UITableViewDataSource {
         let sortedItem1 = item1.sorted { $0.date! > $1.date! }
         let sortedItem2 = item2.sorted { $0.date! > $1.date! }
         
-        cell.open1.text = "Open: \(sortedItem1[indexPath.section].open1)"
-        cell.low1.text = "Low: \(sortedItem1[indexPath.section].low1)"
+        cell.open1.text = "Open: \(sortedItem1[indexPath.row].open1)"
+        cell.low1.text = "Low: \(sortedItem1[indexPath.row].low1)"
         
         cell.open2.text = "Open: \(sortedItem2[indexPath.row].open2)"
         cell.low2.text = "Low: \(sortedItem2[indexPath.row].low2)"

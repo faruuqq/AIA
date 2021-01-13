@@ -24,6 +24,8 @@
 		2A68DFA225AE4C090062BE62 /* SecondCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A68DFA025AE4C090062BE62 /* SecondCell.xib */; };
 		2A68DFA825AE55D40062BE62 /* SampleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A68DFA725AE55D40062BE62 /* SampleTableViewController.swift */; };
 		2A68DFAC25AE55E70062BE62 /* NewSecondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A68DFAB25AE55E70062BE62 /* NewSecondVC.swift */; };
+		2A68DFB125AE80A00062BE62 /* Third.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A68DFB025AE80A00062BE62 /* Third.storyboard */; };
+		2A68DFB425AE80B60062BE62 /* ThirdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A68DFB325AE80B60062BE62 /* ThirdVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		2A68DFA025AE4C090062BE62 /* SecondCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondCell.xib; sourceTree = "<group>"; };
 		2A68DFA725AE55D40062BE62 /* SampleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTableViewController.swift; sourceTree = "<group>"; };
 		2A68DFAB25AE55E70062BE62 /* NewSecondVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSecondVC.swift; sourceTree = "<group>"; };
+		2A68DFB025AE80A00062BE62 /* Third.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Third.storyboard; sourceTree = "<group>"; };
+		2A68DFB325AE80B60062BE62 /* ThirdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,7 @@
 				2A68DF7A25AC5A4A0062BE62 /* NetworkController.swift */,
 				2A68DF9225AD95D00062BE62 /* Home View */,
 				2A68DF9725AD9B4C0062BE62 /* Second View */,
+				2A68DFAF25AE80880062BE62 /* Third View */,
 				2A68DF6925AC500E0062BE62 /* Assets.xcassets */,
 				2A68DF6B25AC500E0062BE62 /* LaunchScreen.storyboard */,
 				2A68DF6E25AC500E0062BE62 /* Info.plist */,
@@ -122,6 +127,15 @@
 				2A68DFA025AE4C090062BE62 /* SecondCell.xib */,
 			);
 			path = "Second View";
+			sourceTree = "<group>";
+		};
+		2A68DFAF25AE80880062BE62 /* Third View */ = {
+			isa = PBXGroup;
+			children = (
+				2A68DFB025AE80A00062BE62 /* Third.storyboard */,
+				2A68DFB325AE80B60062BE62 /* ThirdVC.swift */,
+			);
+			path = "Third View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +198,7 @@
 				2A68DF6D25AC500E0062BE62 /* LaunchScreen.storyboard in Resources */,
 				2A68DFA225AE4C090062BE62 /* SecondCell.xib in Resources */,
 				2A68DF6A25AC500E0062BE62 /* Assets.xcassets in Resources */,
+				2A68DFB125AE80A00062BE62 /* Third.storyboard in Resources */,
 				2A68DF6825AC500C0062BE62 /* Main.storyboard in Resources */,
 				2A68DF8A25AD94890062BE62 /* Second.storyboard in Resources */,
 				2A68DF8625AD07850062BE62 /* HomeDetailCell.xib in Resources */,
@@ -197,6 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A68DFB425AE80B60062BE62 /* ThirdVC.swift in Sources */,
 				2A68DF8125AC96610062BE62 /* HomeDetailVC.swift in Sources */,
 				2A68DF7B25AC5A4A0062BE62 /* NetworkController.swift in Sources */,
 				2A68DF7825AC599D0062BE62 /* HomeModel.swift in Sources */,

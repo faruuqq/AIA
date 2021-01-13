@@ -130,13 +130,6 @@ extension HomeDetailVC {
         })
     }
     
-//    fileprivate func applySnapshot(item: [Intraday]) {
-//        var snapshot = DataSourceSnapshot()
-//        snapshot.appendSections([0])
-//        snapshot.appendItems(item)
-//        dataSource.apply(snapshot, animatingDifferences: true)
-//    }
-    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let format = DateFormatter()
         format.locale = .current
